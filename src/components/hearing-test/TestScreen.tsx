@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useTest } from '@/context/TestContext';
 import { TestResult } from '@/types/hearing-test';
 import { ArrowLeft, Volume2, Waves } from 'lucide-react';
-import { AudioEngine } from '@/lib/audio-engine';
 
 const TestScreen: React.FC = () => {
   const { 
@@ -18,40 +17,12 @@ const TestScreen: React.FC = () => {
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
   const [testPhase, setTestPhase] = useState<'instructions' | 'playing' | 'selection'>('instructions');
   const [audioLevel, setAudioLevel] = useState(0);
-  const [testError, setTestError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  
-  const audioEngineRef = useRef<AudioEngine | null>(null);
-  const playedWordRef = useRef<string | null>(null);
-
-  useEffect(() => {
-    // Audio engine'i başlat
-    const initializeAudio = async () => {
-      try {
-        audioEngineRef.current = new AudioEngine();
-        await audioEngineRef.current.initialize();
-        console.log('Audio engine initialized successfully');
-      } catch (error) {
-        console.error('Audio initialization error:', error);
-        setTestError('Ses sistemi başlatılamadı. Lütfen tarayıcınızı güncelleyin.');
-      }
-    };
-
-    initializeAudio();
-
-    // Cleanup
-    return () => {
-      if (audioEngineRef.current) {
-        audioEngineRef.current.dispose();
-      }
-    };
-  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
     
     if (isPlaying) {
-      // Gerçek zamanlı ses seviyesi görselleştirmesi
+      // Simulate audio level visualization
       interval = setInterval(() => {
         setAudioLevel(Math.random() * 100);
       }, 100);
@@ -67,70 +38,33 @@ const TestScreen: React.FC = () => {
     return null;
   }
 
-  const handleStartTest = async () => {
-    if (!audioEngineRef.current || !selectedScenario) return;
+  const handleStartTest = () => {
+    setTestPhase('playing');
+    setIsPlaying(true);
     
-    setIsLoading(true);
-    setTestError(null);
-    
-    try {
-      setTestPhase('playing');
-      setIsPlaying(true);
-      
-      console.log('Starting test with scenario:', selectedScenario);
-      console.log('Target words:', selectedScenario.targetWords);
-      
-      // Gerçek ses testini başlat
-      await audioEngineRef.current.startTest(selectedScenario);
-      
-      // Test tamamlandıktan sonra
-      setTimeout(() => {
-        console.log('Test completed, moving to selection phase');
-        setIsPlaying(false);
-        setTestPhase('selection');
-        setIsLoading(false);
-      }, 6000); // 6 saniye (4s ses + 2s geçiş)
-      
-    } catch (error) {
-      console.error('Test başlatma hatası:', error);
-      setTestError(`Test başlatılamadı: ${error.message || 'Bilinmeyen hata'}`);
+    // Simulate test duration (5 seconds)
+    setTimeout(() => {
       setIsPlaying(false);
-      setIsLoading(false);
-      setTestPhase('instructions');
-    }
+      setTestPhase('selection');
+    }, 5000);
   };
 
   const handleWordSelection = (word: string) => {
     setSelectedWord(word);
     
-    // Gerçek frekans değerini hesapla
-    const wordFrequency = AudioEngine.getWordFrequency(word);
-    
-    // Test sonucunu oluştur
+    // Create test result
     const result: TestResult = {
       selectedWord: word,
-      estimatedFrequency: `${wordFrequency} Hz (${selectedScenario.frequencyRange})`,
+      estimatedFrequency: selectedScenario.frequencyRange,
       scenario: selectedScenario.name,
       userProfile,
     };
     
     setTestResult(result);
-    
-    // Ses testini durdur
-    if (audioEngineRef.current) {
-      audioEngineRef.current.stopTest();
-    }
-    
     setCurrentStep(3);
   };
 
   const handleBack = () => {
-    // Ses testini durdur
-    if (audioEngineRef.current) {
-      audioEngineRef.current.stopTest();
-    }
-    setIsPlaying(false);
-    setTestPhase('instructions');
     setCurrentStep(1);
   };
 
@@ -177,24 +111,10 @@ const TestScreen: React.FC = () => {
               </div>
               <button
                 onClick={handleStartTest}
-                disabled={isLoading || !!testError}
-                className="hearing-button-primary text-lg px-8 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="hearing-button-primary text-lg px-8 py-4"
               >
-                {isLoading ? 'Başlatılıyor...' : 'Testi Başlat'}
+                Testi Başlat
               </button>
-              
-              {testError && (
-                <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-                  <p className="font-medium">Hata:</p>
-                  <p className="text-sm">{testError}</p>
-                  <button
-                    onClick={() => setTestError(null)}
-                    className="mt-2 text-xs underline hover:no-underline"
-                  >
-                    Tekrar dene
-                  </button>
-                </div>
-              )}
             </div>
           </Card>
         )}
