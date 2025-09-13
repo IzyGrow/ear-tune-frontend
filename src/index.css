@@ -7,34 +7,65 @@ All colors MUST be HSL.
 */
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+:root {
+    /* Medical Blue-Green Color Palette */
+    --background: 210 45% 98%;
+    --foreground: 210 20% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 210 50% 99%;
+    --card-foreground: 210 20% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 210 50% 99%;
+    --popover-foreground: 210 20% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Medical Blue */
+    --primary: 210 85% 58%;
+    --primary-foreground: 210 45% 98%;
+    --primary-hover: 210 85% 52%;
+    --primary-active: 210 85% 46%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary: Calming Green */
+    --secondary: 165 75% 45%;
+    --secondary-foreground: 210 45% 98%;
+    --secondary-hover: 165 75% 40%;
+    --secondary-active: 165 75% 35%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent: Teal */
+    --accent: 180 75% 50%;
+    --accent-foreground: 210 45% 98%;
+    --accent-hover: 180 75% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 35% 92%;
+    --muted-foreground: 210 15% 55%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 210 45% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 25% 88%;
+    --input: 210 30% 90%;
+    --ring: 210 85% 58%;
+
+    /* Medical App Specific Colors */
+    --success: 145 75% 50%;
+    --warning: 45 85% 60%;
+    --info: 210 85% 60%;
+    
+    /* Gradients for Modern Medical UI */
+    --gradient-primary: linear-gradient(135deg, hsl(210 85% 58%), hsl(180 75% 50%));
+    --gradient-secondary: linear-gradient(135deg, hsl(165 75% 45%), hsl(145 75% 50%));
+    --gradient-background: linear-gradient(180deg, hsl(210 45% 98%), hsl(210 40% 96%));
+    --gradient-card: linear-gradient(145deg, hsl(210 50% 99%), hsl(210 45% 97%));
+    
+    /* Shadows for Depth */
+    --shadow-soft: 0 2px 8px hsl(210 25% 80% / 0.3);
+    --shadow-medium: 0 4px 16px hsl(210 25% 75% / 0.4);
+    --shadow-strong: 0 8px 24px hsl(210 25% 70% / 0.5);
+    --shadow-glow: 0 0 20px hsl(210 85% 58% / 0.3);
+    
+    /* Animation Timings */
+    --transition-fast: 0.15s ease-out;
+    --transition-normal: 0.3s ease-out;
+    --transition-slow: 0.5s ease-out;
 
     --radius: 0.5rem;
 
@@ -55,34 +86,54 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+.dark {
+    /* Dark Mode Medical Theme */
+    --background: 210 25% 8%;
+    --foreground: 210 45% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 210 25% 10%;
+    --card-foreground: 210 45% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 210 25% 10%;
+    --popover-foreground: 210 45% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 210 85% 65%;
+    --primary-foreground: 210 25% 8%;
+    --primary-hover: 210 85% 60%;
+    --primary-active: 210 85% 55%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 165 75% 55%;
+    --secondary-foreground: 210 25% 8%;
+    --secondary-hover: 165 75% 50%;
+    --secondary-active: 165 75% 45%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 180 75% 60%;
+    --accent-foreground: 210 25% 8%;
+    --accent-hover: 180 75% 55%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --muted: 210 20% 15%;
+    --muted-foreground: 210 15% 65%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 65%;
+    --destructive-foreground: 210 25% 8%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 210 20% 20%;
+    --input: 210 20% 18%;
+    --ring: 210 85% 65%;
+
+    --success: 145 75% 60%;
+    --warning: 45 85% 70%;
+    --info: 210 85% 70%;
+    
+    --gradient-primary: linear-gradient(135deg, hsl(210 85% 65%), hsl(180 75% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(165 75% 55%), hsl(145 75% 60%));
+    --gradient-background: linear-gradient(180deg, hsl(210 25% 8%), hsl(210 20% 12%));
+    --gradient-card: linear-gradient(145deg, hsl(210 25% 10%), hsl(210 20% 15%));
+    
+    --shadow-soft: 0 2px 8px hsl(210 25% 5% / 0.5);
+    --shadow-medium: 0 4px 16px hsl(210 25% 3% / 0.6);
+    --shadow-strong: 0 8px 24px hsl(210 25% 2% / 0.7);
+    --shadow-glow: 0 0 20px hsl(210 85% 65% / 0.4);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -101,5 +152,89 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-background);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Medical App Specific Components */
+  .hearing-card {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6;
+    box-shadow: var(--shadow-soft);
+    background: var(--gradient-card);
+  }
+
+  .hearing-button-primary {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-xl px-6 py-3 text-sm font-medium transition-all duration-300;
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-medium);
+  }
+
+  .hearing-button-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+  }
+
+  .hearing-button-secondary {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-xl px-6 py-3 text-sm font-medium transition-all duration-300;
+    background: var(--gradient-secondary);
+    color: hsl(var(--secondary-foreground));
+    box-shadow: var(--shadow-medium);
+  }
+
+  .hearing-button-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+  }
+
+  .audio-visualizer {
+    @apply relative overflow-hidden rounded-full;
+    background: var(--gradient-primary);
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-glow {
+    0% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    100% {
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+    }
+  }
+
+  .scenario-card {
+    @apply hearing-card transition-all duration-300 cursor-pointer hover:scale-105;
+  }
+
+  .scenario-card:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .test-word-button {
+    @apply relative px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300;
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--border));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .test-word-button:hover {
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    border-color: hsl(var(--primary));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-strong);
+  }
+
+  .test-word-button.selected {
+    background: var(--gradient-secondary);
+    color: hsl(var(--secondary-foreground));
+    border-color: hsl(var(--secondary));
+    box-shadow: var(--shadow-glow);
   }
 }
